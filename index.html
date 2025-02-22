@@ -5,50 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mary Rose P. Bolito</title>
     <link rel="stylesheet" href="assets/css/style.css">
+     <style>
+      * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            background-color: #333;
+            color: white;
+            padding: 15px;
+        }
+
+        .col-3 {
+            flex: 0 0 25%;
+            text-align: center;
+        }
+
+        .col-9 {
+            flex: 0 0 75%;
+            text-align: right;
+        }
+
+        .col-9 nav {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+
+        .col-9 nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .col-3, .col-9 {
+                flex: 0 0 100%;
+                text-align: center;
+            }
+
+            .col-9 nav {
+                justify-content: center;
+                margin-top: 10px;
+            }
+        }
 </head>
 <body style="background-color: #05041c">
-    <header> 
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    <!--<header> 
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <section class="hero">
-        <h2>Hey there, <br>I'm MARY ROSE PANGANORON BOLITO</h2>
-        <p>Software Developer | Designer | Freelancer</p>
-    </section>
-    
-    <section class="projects">
-        <h2>Featured Projects</h2>
-        <div class="project">
-            <img src="assets/images/project1.jpg" alt="Project 1">
-            <h3>Project One</h3>
-            <p>A description of this awesome project.</p>
+      <header class="header">
+        <div class="col-3">
+            <h2>Logo</h2>
         </div>
-        <div class="project">
-            <img src="assets/images/project2.jpg" alt="Project 2">
-            <h3>Project Two</h3>
-            <p>Another great project description.</p>
+        <div class="col-9">
+            <nav>
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Contact</a>
+            </nav>
         </div>
-    </section>
-    
-    <footer>
-        <p>&copy; 2024 My Portfolio. All rights reserved.</p>
-    </footer>-->
+    </header>
 </body>
 </html>
