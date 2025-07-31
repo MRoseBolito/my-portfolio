@@ -3,82 +3,823 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mary Rose P. Bolito</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-     <style>
-      * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+    <title>Rose Dev | Web Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-pill {
+            transition: all 0.2s ease;
+        }
+        
+        .skill-pill:hover {
+            transform: scale(1.05);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
 
-        .header {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            background-color: #333;
+        .dark-section {
+            background-color: #111827;
             color: white;
-            padding: 15px;
         }
 
-        .col-3 {
-            flex: 0 0 25%;
-            text-align: center;
+        .light-section {
+            background-color: #f9fafb;
+            color: #1f2937;
         }
 
-        .col-9 {
-            flex: 0 0 75%;
-            text-align: right;
+        .timeline-item {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 24px;
         }
 
-        .col-9 nav {
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
         }
 
-        .col-9 nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            height: 14px;
+            width: 14px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
         }
 
-        /* Responsive */
-        @media screen and (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                text-align: center;
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
             }
-
-            .col-3, .col-9 {
-                flex: 0 0 100%;
-                text-align: center;
+            40% {
+                transform: translateY(-10px);
             }
-
-            .col-9 nav {
-                justify-content: center;
-                margin-top: 10px;
+            60% {
+                transform: translateY(-5px);
             }
         }
-         </style>
+    </style>
 </head>
-<body style="background-color: #05041c">
-      <header class="header">
-        <div class="col-3">
-            <h2>Logo</h2>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white bg-opacity-90 backdrop-blur-sm shadow-sm z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-gradient">Rose Dev</a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link font-medium text-gray-700 hover:text-indigo-600 transition">Home</a>
+                <a href="#about" class="nav-link font-medium text-gray-700 hover:text-indigo-600 transition">About</a>
+                <a href="#skills" class="nav-link font-medium text-gray-700 hover:text-indigo-600 transition">Skills</a>
+                <a href="#projects" class="nav-link font-medium text-gray-700 hover:text-indigo-600 transition">Projects</a>
+                <a href="#contact" class="nav-link font-medium text-gray-700 hover:text-indigo-600 transition">Contact</a>
+            </div>
+            
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
         </div>
-        <div class="col-9">
-            <nav>
-                <a href="#">Home</a>
-                <a href="#">About</a>
-                <a href="#">Services</a>
-                <a href="#">Contact</a>
-            </nav>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-md">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#home" class="font-medium text-gray-700 hover:text-indigo-600 transition">Home</a>
+                <a href="#about" class="font-medium text-gray-700 hover:text-indigo-600 transition">About</a>
+                <a href="#skills" class="font-medium text-gray-700 hover:text-indigo-600 transition">Skills</a>
+                <a href="#projects" class="font-medium text-gray-700 hover:text-indigo-600 transition">Projects</a>
+                <a href="#contact" class="font-medium text-gray-700 hover:text-indigo-600 transition">Contact</a>
+            </div>
         </div>
-    </header>
-</body>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="dark-section min-h-screen flex items-center pt-16">
+        <div class="container mx-auto px-4 py-16 md:py-32">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                        Hi, I'm <span class="text-gradient">Rose</span>
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-300">
+                        Web Developer | Admin Solutions Specialist
+                    </h2>
+                    <p class="text-lg text-gray-300 mb-8 max-w-lg"> 
+                        Whether it's building smooth, user-friendly and responsive websites or keeping projects on track behind the scenes, I blend technical expertise with virtual assistant skills, giving you both tech and task management in one reliable partner. 
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#projects" class="gradient-bg text-white px-6 py-3 rounded-full font-medium hover:opacity-90 transition">
+                            View My Work
+                        </a>
+                        <a href="#contact" class="bg-transparent border-2 border-indigo-500 text-indigo-400 px-6 py-3 rounded-full font-medium hover:bg-indigo-500 hover:bg-opacity-10 transition">
+                            Contact Me
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative animate-float">
+                        <div class="w-64 h-64 md:w-80 md:h-80 overflow-hidden ">
+                             
+                            <img class="w-full h-full object-cover" src="D:\My Portfolio\image\rose-bolito.png" alt="Mary Rose Bolito"  class="my-image" width="100%"/>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator">
+                <a href="#about" class="text-gray-400 hover:text-white transition">
+                    <i class="fas fa-chevron-down text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="light-section py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">About Me</h2>
+                <div class="w-24 h-1 gradient-bg mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <p class="text-lg mb-6">
+                            I’m a passionate and detail-oriented Web Developer with hands-on experience in building user-friendly, efficient digital solutions. While my foundation is in both frontend and backend development, I also bring my skills, tools, and mindset into roles that support operations, administration, and project management.  
+                        </p>
+                        <p class="text-lg mb-6">
+                           With a strong eye for structure, process, and user experience, I thrive not only in writing code but also in organizing tasks, supporting teams, and helping businesses run smoothly behind the scenes. From managing digital tools to streamlining workflows, I aim to be a reliable, multi-skilled partner for clients who need both tech support and dependable day-to-day assistance.
+                        </p>
+                        <p class="text-lg">
+                            Whether you need a polished website or someone to help keep your projects on track, I’m here to help! Bridging the gap between development and support with precision, flexibility, and a can-do mindset.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-semibold mb-6">My Journey</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="timeline-item">
+                            <h4 class="text-xl font-medium text-indigo-600">2024 - Present</h4>
+                            <p class="text-lg font-medium">Operations Supervisor at Apekop Travel and Tours</p>
+                            <p class="text-gray-600">I’m taking on a dynamic role as the Operations Supervisor where I also handle IT and marketing — blending technical skills with strategy and leadership for over a year now. From building websites and managing digital systems to leading teams and designing visual content, I bring a unique mix of creativity, technical expertise, and problem-solving.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4 class="text-xl font-medium text-indigo-600">2018 - 2024</h4>
+                            <p class="text-lg font-medium">Website Developer at Incramind Development Inc.</p>
+                            <p class="text-gray-600"> Dedicated programmer with almost 6 years of experience to the company. Mostly doing tasks in front-end including checking bugs, designs and functionalities. Perform software testing to uncover bugs and troubleshoot issues prior to application launch. Contribute ideas and suggestions to the team and delivered updates on deadlines, designs and enhancements.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4 class="text-xl font-medium text-indigo-600">2022 - 2023</h4>
+                            <p class="text-lg font-medium">Web Developer on Freelancer Teams</p>
+                            <p class="text-gray-600">Do some freelance together with a group of web developers that works a team-based project. Creating a responsive web design using platform with team collaboration and client management tools for building and managing websites a scale. Coordinate with project management staff on database development timelines and project scope.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="dark-section py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">My Skills</h2>
+                <div class="w-24 h-1 gradient-bg mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+               <!-- Frontend & Backend Skills -->
+                <div class="bg-gray-800 rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center mr-4">
+                            <i class="fas fa-code text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold">Frontend & Backend</h3>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fab fa-html5 text-orange-400"></i>
+                            <span class="text-indigo-300">HTML</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fab fa-css3-alt text-blue-400"></i>
+                            <span class="text-indigo-300">CSS</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fab fa-css3-alt text-blue-400"></i>
+                            <span class="text-indigo-300">Tailwind CSS</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fab fa-js text-yellow-400"></i>
+                            <span class="text-indigo-300">JavaScript</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-code text-indigo-400"></i>
+                            <span class="text-indigo-300">jQuery</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-random text-indigo-400"></i>
+                            <span class="text-indigo-300">AJAX</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fab fa-php text-purple-400"></i>
+                            <span class="text-indigo-300">PHP</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fab fa-laravel text-red-400"></i>
+                            <span class="text-indigo-300">Laravel</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fab fa-java text-red-600"></i>
+                            <span class="text-indigo-300">Java</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools Skills -->
+                <div class="bg-gray-800 rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center mr-4">
+                            <i class="fas fa-tools text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold">DevOps & Developer Tools</h3>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fab fa-git-alt text-orange-400"></i>
+                            <span class="text-indigo-300">Git</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fab fa-docker text-blue-400"></i>
+                            <span class="text-indigo-300">Docker</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-code text-yellow-300"></i>
+                            <span class="text-indigo-300">Sublime Text</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-database text-pink-400"></i>
+                            <span class="text-indigo-300">phpMyAdmin</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-server text-green-400"></i>
+                            <span class="text-indigo-300">XAMPP / WAMP</span>
+                        </div>
+                    </div>
+                </div>
+
+             <!-- Hosting Skills -->
+            <div class="bg-gray-800 rounded-xl p-6 shadow-lg">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center mr-4">
+                        <i class="fas fa-globe text-white text-xl"></i>
+                    </div> 
+                    <h3 class="text-2xl font-semibold">Hosting</h3>
+                </div>
+                
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-building text-indigo-400"></i>
+                        <span class="text-indigo-300">GoDaddy</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-server text-indigo-400"></i>
+                        <span class="text-indigo-300">Hostinger</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-network-wired text-indigo-400"></i>
+                        <span class="text-indigo-300">DNS Management</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-cogs text-indigo-400"></i>
+                        <span class="text-indigo-300">cPanel / hPanel</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-lock text-indigo-400"></i>
+                        <span class="text-indigo-300">SSL & Security Settings</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-search text-indigo-400"></i>
+                        <span class="text-indigo-300">SEO Optimization</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-magic text-indigo-400"></i>
+                        <span class="text-indigo-300">1-Click Installers</span>
+                    </div>
+                </div>
+            </div>
+
+                <!-- Collaboration & Productivity Tools -->
+                <div class="bg-gray-800 rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center mr-4">
+                            <i class="fas fa-clipboard-list text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold">Collaboration & Productivity Tools</h3>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-envelope text-indigo-400"></i>
+                            <span class="text-indigo-300">Email Management</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fab fa-trello text-indigo-400"></i>
+                            <span class="text-indigo-300">Trello</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fab fa-google text-indigo-400"></i>
+                            <span class="text-indigo-300">Google Workspace</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fab fa-slack text-indigo-400"></i>
+                            <span class="text-indigo-300">Slack</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-video text-indigo-400"></i>
+                            <span class="text-indigo-300">Zoom</span>
+                        </div> 
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-cloud text-indigo-400"></i>
+                            <span class="text-indigo-300">Google Drive</span>
+                        </div> 
+                    </div>
+                </div>  
+                <!-- Website Builders & CMS -->
+                <div class="bg-gray-800 rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center mr-4">
+                            <i class="fas fa-laptop-code text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold">Website Builders & CMS</h3>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fab fa-wordpress text-blue-400"></i>
+                            <span class="text-indigo-300">WordPress</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-shopping-cart text-green-400"></i>
+                            <span class="text-indigo-300">WooCommerce</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-pencil-ruler text-pink-400"></i>
+                            <span class="text-indigo-300">Duda</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-store text-yellow-400"></i>
+                            <span class="text-indigo-300">Ecwid</span>
+                        </div>
+
+                        <!-- Website Product Listing -->
+                        <div class="flex items-center gap-2 mt-2">
+                            <i class="fas fa-box-open text-purple-400"></i>
+                            <span class="text-indigo-300">Website Product Listing</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Other Skills -->
+                <div class="bg-gray-800 rounded-xl p-6 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center mr-4">
+                            <i class="fas fa-lightbulb text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold">Other Skills</h3>  
+                    </div>
+
+                    <!-- Technical & Creative Skills -->
+                    <div class="space-y-2 mb-4"> 
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-mobile-alt text-yellow-400"></i>
+                            <span class="text-indigo-300">Responsive Design</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-robot text-green-400"></i>
+                            <span class="text-indigo-300">ChatGPT</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-tachometer-alt text-blue-400"></i>
+                            <span class="text-indigo-300">Performance Optimization</span>
+                        </div> 
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-paint-brush text-purple-400"></i>
+                            <span class="text-indigo-300">Canva</span>
+                        </div> 
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-image text-red-400"></i>
+                            <span class="text-indigo-300">Adobe Photoshop</span>
+                        </div>
+
+                    </div>
+
+                    <!-- Soft Skills with Icons -->
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-comments text-indigo-400"></i>
+                            <span class="text-indigo-300">Communication</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-puzzle-piece text-indigo-400"></i>
+                            <span class="text-indigo-300">Problem Solving</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-users text-indigo-400"></i>
+                            <span class="text-indigo-300">Team Collaboration</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-clock text-indigo-400"></i>
+                            <span class="text-indigo-300">Time Management</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-sync-alt text-indigo-400"></i>
+                            <span class="text-indigo-300">Adaptability</span>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="light-section py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">My Projects</h2>
+                <div class="w-24 h-1 gradient-bg mx-auto rounded-full"></div>
+                <p class="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">
+                    Here are some of my recent projects. Each one represents different skills and challenges I've tackled.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card bg-white rounded-xl overflow-hidden shadow-lg transition">
+                    <div class="h-48 bg-indigo-100 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-indigo-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            <polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline>
+                            <polyline points="7.5 19.79 7.5 14.6 3 12"></polyline>
+                            <polyline points="21 12 16.5 14.6 16.5 19.79"></polyline>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                    </div>
+                    <div class="p-6"> 
+                        <h3 class="text-xl font-semibold mb-2">E-Commerce Platform</h3>
+                        <p class="text-gray-500 italic mb-2">Apekop Travel and Tours</p>
+                        <p class="text-gray-600 mb-4">
+                            An ecommerce website built for Apekop Travel and Tours, allowing customers to conveniently book ferry tickets, island tours, and travel services online. The platform supports secure payments, trip schedules, and customer booking management.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">Ecwid E-Commerce Platform</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">Custom HTML & CSS</span> 
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">GoDaddy</span> 
+                        </div>
+                        <div class="flex justify-between">
+                            <a href="https://apekoptravelandtours.com" class="text-indigo-600 hover:text-indigo-800 font-medium" target="_blank" el="noopener noreferrer">
+                                Live Demo <i class="fas fa-external-link-alt ml-1" ></i>
+                            </a> 
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card bg-white rounded-xl overflow-hidden shadow-lg transition">
+                    <div class="h-48 bg-indigo-100 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-indigo-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold ">Walk-in Ticketing Management System</h3>
+                        <p class="text-gray-500 italic mb-2">Apekop Travel and Tours</p>
+                        <p class="text-gray-600 mb-4">
+                            A custom-built system designed for a shipping company to streamline and manage on-site ticket sales. The system allows staff to issue, update, and track tickets for walk-in passengers in real-time.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">HTML</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">Bootstrap</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">CSS</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">PHP</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">AJAX</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">jQuery</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">Hostinger</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">phpMyAdmin</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p class="text-sm text-gray-500 italic">
+                                Live demo not available – company confidential project.
+                            </p> 
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card bg-white rounded-xl overflow-hidden shadow-lg transition">
+                    <div class="h-48 bg-indigo-100 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-indigo-500" fill="currentColor" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold ">Payroll Management System</h3>
+                        <p class="text-gray-500 italic mb-2">Apekop Travel and Tours</p>
+                        <p class="text-gray-600 mb-4">
+                            A streamlined payroll management tool built to automate employee salary calculations, generate payslips, and manage attendance and deductions. Designed to simplify payroll processes and reduce manual errors for accounting departments.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">HTML</span> 
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">CSS</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">Bootstrap</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">PHP</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">jQuery</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">AJAX</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">Hostinger</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">phpMyAdmin</span>
+                        </div>
+                        </div>
+                        <div class="flex justify-between">
+                            <p class="text-sm text-gray-500 italic">
+                                Live demo not available – company confidential project.
+                            </p> 
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 --> 
+                <div class="project-card bg-white rounded-xl overflow-hidden shadow-lg transition">
+                    <div class="h-48 bg-indigo-100 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-indigo-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M4 4h16v16H4z"></path>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Business Website (Freelance)</h3>
+                        <p class="text-gray-500 italic mb-2">Client: International Business (Freelance Work)</p>
+                        <p class="text-gray-600 mb-4">
+                            Collaborated on a WordPress site using Elementor to design key pages, customize layouts, and optimize performance. Worked closely with the client to match their branding and improve user flow.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">WordPress</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">Elementor</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">WooCommerce</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">Custom CSS</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">cPanel</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <p class="text-sm text-gray-500 italic">
+                                Live demo not available – freelance project for a private client.
+                            </p>
+                        </div>
+                    </div>
+                </div> 
+                <!-- Project 5 -->
+                <div class="project-card bg-white rounded-xl overflow-hidden shadow-lg transition">
+                    <div class="h-48 bg-indigo-100 flex items-center justify-center">
+                        <i class="fas fa-laptop-code text-indigo-500 text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Client Websites for Digital Agency</h3>
+                        <p class="text-gray-600 mb-4">
+                            Worked as a freelance web developer for a digital agency, building custom websites using the Duda platform for a variety of clients. Collaborated with designers and project managers to ensure brand consistency and responsive design across devices.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">Duda Platform</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">Team Collaboration</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">Web Design</span>
+                        </div>
+                        <p class="text-sm italic text-gray-400">This project is protected by NDA / company policy.</p>
+                    </div>
+                </div> 
+                <!-- Project 6 -->
+               <div class="project-card bg-white rounded-xl overflow-hidden shadow-lg transition">
+                    <div class="h-48 bg-indigo-100 flex items-center justify-center">
+                        <i class="fas fa-paint-brush text-indigo-500 text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Graphic Design Projects</h3>
+                        <p class="text-gray-600 mb-4">
+                            Created a range of visual assets for Apekop Travel and various freelance clients. Projects included logo design, flyers, banners, social media posts, business cards, and other marketing materials for both print and digital use.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">Canva</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">Adobe Photoshop</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">Logo Design</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">Marketing Materials</span>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-600 text-sm rounded-full">Social Media</span>
+                        </div>
+                        <p class="text-sm italic text-gray-400">Design previews available upon request due to client confidentiality.</p>
+                    </div>
+                </div> 
+            </div> 
+        </div>
+    </section> 
+    <!-- Contact Section -->
+    <section id="contact" class="dark-section py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
+                <div class="w-24 h-1 gradient-bg mx-auto rounded-full"></div>
+                <p class="text-lg text-gray-300 mt-4 max-w-2xl mx-auto">
+                    Have a project in mind or want to collaborate? Feel free to reach out!
+                </p>
+            </div> 
+            <div class="flex flex-col md:flex-row gap-12"> 
+                <div class="w-full">
+                    <div class="bg-gray-800 rounded-xl p-8 shadow-lg h-full">
+                        <h3 class="text-2xl font-semibold mb-6">Contact Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-envelope text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-gray-300">Email</h4>
+                                    <a href="mailto:mrose.bolito28@gmail.com" class="text-indigo-400 hover:text-indigo-300 transition">mrose.bolito28@gmail.com</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-phone text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-gray-300">Phone</h4>
+                                    <a href="tel:+63 910 878 7677 " class="text-indigo-400 hover:text-indigo-300 transition">+63 910 878 7677</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-gray-300">Location</h4>
+                                    <p class="text-gray-400">Purok 4 Saging, Tagustusan, Balilihan, Bohol, 6342, Philippines</p>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="#" class="text-xl font-bold text-gradient">Rose Dev</a>
+                </div>
+                
+                <div class="flex space-x-6 mb-4 md:mb-0">
+                    <a href="#home" class="hover:text-indigo-400 transition">Home</a>
+                    <a href="#about" class="hover:text-indigo-400 transition">About</a>
+                    <a href="#skills" class="hover:text-indigo-400 transition">Skills</a>
+                    <a href="#projects" class="hover:text-indigo-400 transition">Projects</a>
+                    <a href="#contact" class="hover:text-indigo-400 transition">Contact</a>
+                </div>
+                
+                <div>
+                    <p>&copy; 2025 Rose Dev. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 rounded-full gradient-bg text-white flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70, // Adjust for fixed header
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9639792d078ab9f3',t:'MTc1MzI1NTgzNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
